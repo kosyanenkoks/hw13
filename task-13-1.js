@@ -4,15 +4,10 @@ async function showUsersData() {
 
     let usersList = await getData('https://api.github.com/users?since=250');
 
-    let getDataInner = url => fetch(url)
-        .then(response => response.json())
-
-
     usersList.forEach(
         async user => {
             let userRepos = user.repos_url;
-            let repos = await getDataInner(userRepos);
-            console.log(user)
+            let repos = await getData(userRepos);
 
             document.body.appendChild(document.createElement('img'))
                 .src = user.avatar_url;
